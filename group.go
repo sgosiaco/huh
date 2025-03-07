@@ -6,8 +6,8 @@ import (
 	"github.com/charmbracelet/bubbles/help"
 	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/charmbracelet/huh/internal/selector"
 	"github.com/charmbracelet/lipgloss"
+	"github.com/sgosiaco/huh/internal/selector"
 )
 
 // Group is a collection of fields that are displayed together with a page of
@@ -189,6 +189,8 @@ func PrevField() tea.Msg {
 // Init initializes the group.
 func (g *Group) Init() tea.Cmd {
 	var cmds []tea.Cmd
+
+	cmds = append(cmds, func() tea.Msg { return updateFieldMsg{} })
 
 	if g.selector.Selected().Skip() {
 		if g.selector.OnLast() {
